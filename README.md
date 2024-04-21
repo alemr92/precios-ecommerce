@@ -44,6 +44,12 @@ curl -X GET 'http://localhost:8080/api/getPrice?date=2020-06-14T10:00:00&product
 ```
 Reemplaza la fecha, el identificador del producto y el identificador de la cadena según sea necesario.
 
+## Tests
+Para hacer los tests ejecutar el siguiente comando
+```bash
+mvn test
+```
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
