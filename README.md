@@ -31,9 +31,9 @@ Construye la imagen Docker:
 ```bash
 docker build -t precios-ecommerce .
 ```
-Ejecuta la imagen Docker: (recordad que no haya nada ejecutandose en el 8080)
+Ejecuta la imagen Docker:
 ```bash
-docker run -p 8080:8080 precios-ecommerce
+docker run -p 8081:8080 precios-ecommerce
 ```
 La aplicación estará disponible en http://localhost:8080/api.
 
@@ -45,7 +45,7 @@ curl -X GET 'http://localhost:8080/api/getPrice?date=2020-06-14T10:00:00&product
 Reemplaza la fecha, el identificador del producto y el identificador de la cadena según sea necesario.
 
 ## Tests
-Para hacer los tests ejecutar el siguiente comando (recordad que no haya nada ejecutandose en el 8080)
+Para hacer los tests ejecutar el siguiente comando
 ```bash
 docker build -t precios-ecommerce .
 docker run precios-ecommerce test
