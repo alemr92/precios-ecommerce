@@ -54,3 +54,91 @@ Please make sure to update tests as appropriate.
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
+## OpenAPI
+```bash
+openapi: 3.0.0
+info:
+  title: API de Precios
+  description: API para consultar precios de productos de una cadena
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Servidor local
+
+paths:
+  /api/:
+    getPrice:
+      summary: Consultar precios
+      description: Permite consultar el precio de un producto para una cadena en una fecha específica.
+      parameters:
+        - in: query
+          name: date
+          required: true
+          schema:
+            type: string
+            format: date-time
+            example: "2020-06-14T10:00:00"
+          description: Fecha de aplicación del precio
+        - in: query
+          name: productId
+          required: true
+          schema:
+            type: integer
+            example: 35455
+          description: ID del producto
+        - in: query
+          name: brandId
+          required: true
+          schema:
+            type: integer
+            example: 1
+          description: ID de la cadena (brand)
+      responses:
+        '200':
+          description: Precios encontrados satisfactoriamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Price'
+        '404':
+          description: No se encontraron precios para los parámetros especificados
+
+components:
+  schemas:
+    Price:
+      type: object
+      properties:
+        productId:
+          type: integer
+          example: 35455
+          description: ID del producto
+        brandId:
+          type: integer
+          example: 1
+          description: ID de la cadena (brand)
+        priceList:
+          type: integer
+          example: 1
+          description: Identificador de la tarifa de precios
+        startDate:
+          type: string
+          format: date-time
+          example: "2020-06-14T00:00:00"
+          description: Fecha de inicio de aplicación del precio
+        endDate:
+          type: string
+          format: date-time
+          example: "2020-12-31T23:59:59"
+          description: Fecha de fin de aplicación del precio
+        price:
+          type: number
+          format: float
+          example: 35.50
+          description: Precio final
+        currency:
+          type: string
+          example: "EUR"
+          description: ISO de la moneda
+```
