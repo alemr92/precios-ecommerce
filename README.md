@@ -40,7 +40,7 @@ La aplicación estará disponible en http://localhost:8080/api.
 ## Uso
 Puedes realizar consultas de precios utilizando el endpoint REST proporcionado por la aplicación. Aquí tienes un ejemplo de cómo hacer una consulta utilizando cURL:
 ```bash
-curl -X GET 'http://localhost:8080/api/getPrice?date=2020-06-14T10:00:00&productId=35455&brandId=1'
+curl -X GET 'http://localhost:8080/api/getPrice?date=2020-06-15 10:00&productId=35455&brandId=1'
 ```
 Reemplaza la fecha, el identificador del producto y el identificador de la cadena según sea necesario.
 
