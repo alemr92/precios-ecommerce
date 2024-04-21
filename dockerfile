@@ -4,9 +4,12 @@ WORKDIR /app
 
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
+COPY entrypoint.sh ./
 
+RUN chmod +x entrypoint.sh
 RUN ./mvnw dependency:go-offline
 
 COPY src ./src
+
 EXPOSE 8080
-CMD ["./mvnw", "spring-boot:run"]
+ENTRYPOINT ["./entrypoint.sh"]
