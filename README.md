@@ -9,16 +9,17 @@ Utiliza una base de datos en memoria (H2) para almacenar los datos de precios.
 Desarrollada en Java con Spring Boot.
 
 ## Requisitos
+```bash
 Java 17
 Maven
 Docker (para la construcción y ejecución del contenedor Docker)
-
+```
 ## Instalación y Ejecución
 ```bash
 git clone https://github.com/alemr92/precios-ecommerce
 ```
 
-## Usage
+## Compilación y ejecución
 Navega al directorio del proyecto:
 ```bash
 cd precios-ecommerce
@@ -50,10 +51,6 @@ Para hacer los tests ejecutar el siguiente comando
 docker build -t precios-ecommerce .
 docker run precios-ecommerce test
 ```
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
 ## OpenAPI
 ```bash
 openapi: 3.0.0
