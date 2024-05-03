@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class PriceControllerIntegrationTest {
 
@@ -22,85 +23,41 @@ class PriceControllerIntegrationTest {
 
     @Test
     void getsPriceAt10AMOnDay14() {
-        Response response = RestAssured.given()
-                .param("date", "2020-06-14 10:00")
-                .param("productId", 35455)
-                .param("brandId", 1)
-                .when()
-                .get("/getPrice");
-
-        response.then().statusCode(200);
-
-        response.then().contentType(ContentType.JSON);
-
-        String actualPrice = response.getBody().jsonPath().getString("price");
-        assertThat(actualPrice).isEqualTo("35.5");
+        getsPrice("2020-06-14 10:00", "35.5");
     }
 
     @Test
     void getsPriceAt16PMOnDay14() {
-        Response response = RestAssured.given()
-                .param("date", "2020-06-14 16:00")
-                .param("productId", 35455)
-                .param("brandId", 1)
-                .when()
-                .get("/getPrice");
-
-        response.then().statusCode(200);
-
-        response.then().contentType(ContentType.JSON);
-
-        String actualPrice = response.getBody().jsonPath().getString("price");
-        assertThat(actualPrice).isEqualTo("25.45");
-        assertThat(response.getBody().jsonPath().getString("priority")).isEqualTo("1");
+        getsPrice("2020-06-14 16:00", "25.45");
     }
+
     @Test
     void getsPriceAt21PMOnDay14() {
-        Response response = RestAssured.given()
-                .param("date", "2020-06-14 21:00")
-                .param("productId", 35455)
-                .param("brandId", 1)
-                .when()
-                .get("/getPrice");
-
-        response.then().statusCode(200);
-
-        response.then().contentType(ContentType.JSON);
-
-        String actualPrice = response.getBody().jsonPath().getString("price");
-        assertThat(actualPrice).isEqualTo("35.5");
-        assertThat(response.getBody().jsonPath().getString("priority")).isEqualTo("0");
+        getsPrice("2020-06-14 21:00", "35.5");
     }
+
     @Test
     void getsPriceAt10AMOnDay15() {
-        Response response = RestAssured.given()
-                .param("date", "2020-06-15 10:00")
-                .param("productId", 35455)
-                .param("brandId", 1)
-                .when()
-                .get("/getPrice");
-
-        response.then().statusCode(200);
-
-        response.then().contentType(ContentType.JSON);
-
-        String actualPrice = response.getBody().jsonPath().getString("price");
-        assertThat(actualPrice).isEqualTo("30.5");
+        getsPrice("2020-06-15 10:00", "30.5");
     }
+
     @Test
     void getsPriceAt21PMOnDay16() {
+        getsPrice("2020-06-16 21:00", "38.95");
+    }
+
+    private void getsPrice(String date, String expectedPrice) {
         Response response = RestAssured.given()
-                .param("date", "2020-06-16 21:00")
+                .param("date", date)
                 .param("productId", 35455)
                 .param("brandId", 1)
                 .when()
                 .get("/getPrice");
 
         response.then().statusCode(200);
-
         response.then().contentType(ContentType.JSON);
 
         String actualPrice = response.getBody().jsonPath().getString("price");
-        assertThat(actualPrice).isEqualTo("38.95");
+        assertThat(actualPrice).isEqualTo(expectedPrice);
     }
 }

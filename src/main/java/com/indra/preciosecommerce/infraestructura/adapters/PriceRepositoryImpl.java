@@ -4,18 +4,24 @@ package com.indra.preciosecommerce.infraestructura.adapters;
 import com.indra.preciosecommerce.infraestructura.entities.PriceEntity;
 import com.indra.preciosecommerce.infraestructura.repositories.PriceJpaRepository;
 import com.indra.preciosecommerce.infraestructura.repositories.PriceRepositoryPort;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Price repository.
+ */
 @Repository
-@Slf4j
 public class PriceRepositoryImpl implements PriceRepositoryPort {
     private final PriceJpaRepository priceJpaRepository;
 
+    /**
+     * Instantiates a new Price repository.
+     *
+     * @param priceJpaRepository the price jpa repository
+     */
     @Autowired
     public PriceRepositoryImpl(PriceJpaRepository priceJpaRepository) {
         this.priceJpaRepository = priceJpaRepository;

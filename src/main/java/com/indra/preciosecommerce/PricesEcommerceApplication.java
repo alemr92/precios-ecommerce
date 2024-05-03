@@ -6,8 +6,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories("com.indra.*")
-@ComponentScan("com.indra.*")
+@EnableJpaRepositories
+@ComponentScan
 public class PricesEcommerceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PricesEcommerceApplication.class, args);

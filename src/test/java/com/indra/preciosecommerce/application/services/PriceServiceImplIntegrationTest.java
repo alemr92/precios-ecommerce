@@ -2,39 +2,46 @@ package com.indra.preciosecommerce.application.services;
 
 
 import com.indra.preciosecommerce.domain.models.Price;
-import com.indra.preciosecommerce.infraestructura.adapters.PriceRepositoryImpl;
 import com.indra.preciosecommerce.infraestructura.entities.PriceEntity;
-import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import com.indra.preciosecommerce.infraestructura.repositories.PriceJpaRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
-import java.util.List;
 
+import static com.indra.preciosecommerce.MotherPrice.returnsADateByDays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class PriceServiceImplIntegrationTest {
+class PriceServiceImplIntegrationTest {
 
-    @InjectMocks
+    @Autowired
     private PriceServiceImpl priceService;
 
-    @Mock
-    private PriceRepositoryImpl priceRepositoryImpl;
+    @Autowired
+    private PriceJpaRepository priceJpaRepository;
 
-    @Test
-    public void getsPrice() {
-        Date date = new Date();
-        Long productId = 35455L;
-        Long brandId = 1L;
+    @BeforeEach
+    public void setUp() {
         PriceEntity priceEntity = new PriceEntity();
+        priceEntity.setProductId(35455L);
+        priceEntity.setBrandId(1L);
+        priceEntity.setPriceList(1L);
+        priceEntity.setStartDate(returnsADateByDays(-1));
+        priceEntity.setEndDate(returnsADateByDays(1));
         priceEntity.setPrice(35.50);
         priceEntity.setCurrency("EUR");
 
-        when(priceRepositoryImpl.findPriceByStartDateLessThanEqualAndEndDateGreaterThanEqualAndProductIdAndBrandId(date, date, productId, brandId))
-                .thenReturn(List.of(priceEntity));
+        priceJpaRepository.save(priceEntity);
+    }
+
+    @Test
+    void testGetPrice() {
+        Date date = new Date();
+        Long productId = 35455L;
+        Long brandId = 1L;
 
         Price price = priceService.getPrice(date, productId, brandId);
 

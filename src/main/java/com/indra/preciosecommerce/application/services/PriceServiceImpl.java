@@ -4,6 +4,7 @@ import com.indra.preciosecommerce.domain.models.Price;
 import com.indra.preciosecommerce.domain.ports.PriceServicePort;
 import com.indra.preciosecommerce.infraestructura.adapters.PriceRepositoryImpl;
 import com.indra.preciosecommerce.infraestructura.entities.PriceEntity;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -11,34 +12,35 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Price service.
+ */
 @Service
 public class PriceServiceImpl implements PriceServicePort {
 
     private final PriceRepositoryImpl priceRepositoryImpl;
+    private final ModelMapper modelMapper;
 
-    public PriceServiceImpl(PriceRepositoryImpl priceRepositoryImpl) {
+    /**
+     * Instantiates a new Price service.
+     *
+     * @param priceRepositoryImpl the price repository
+     * @param modelMapper         the model mapper
+     */
+    public PriceServiceImpl(PriceRepositoryImpl priceRepositoryImpl, ModelMapper modelMapper) {
         this.priceRepositoryImpl = priceRepositoryImpl;
+        this.modelMapper = modelMapper;
     }
 
     @Override
     public Price getPrice(Date date, Long productId, Long brandId) {
-        List<PriceEntity> prices = this.priceRepositoryImpl.findPriceByStartDateLessThanEqualAndEndDateGreaterThanEqualAndProductIdAndBrandId(date, date, productId, brandId);
-        Optional<PriceEntity> price = prices.stream()
+        List<PriceEntity> prices = priceRepositoryImpl.findPriceByStartDateLessThanEqualAndEndDateGreaterThanEqualAndProductIdAndBrandId(date, date, productId, brandId);
+        Optional<PriceEntity> maxPriorityPrice = prices.stream()
                 .max(Comparator.comparingLong(PriceEntity::getPriority));
-        return price.map(this::mapToDomain).orElse(null);
+        return maxPriorityPrice.map(this::convertToPriceModel).orElse(null);
     }
 
-    private Price mapToDomain(PriceEntity priceEntity) {
-        Price price = new Price();
-        price.setBrandId(priceEntity.getBrandId());
-        price.setStartDate(priceEntity.getStartDate());
-        price.setEndDate(priceEntity.getEndDate());
-        price.setPriceList(priceEntity.getPriceList());
-        price.setProductId(priceEntity.getProductId());
-        price.setPriority(priceEntity.getPriority());
-        price.setPrice(priceEntity.getPrice());
-        price.setCurrency(priceEntity.getCurrency());
-        return price;
+    private Price convertToPriceModel(PriceEntity priceEntity) {
+        return modelMapper.map(priceEntity, Price.class);
     }
-
 }
