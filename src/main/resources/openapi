@@ -9,8 +9,8 @@ servers:
     description: Servidor local
 
 paths:
-  /api/:
-    getPrice:
+  /api/getPrice:
+    get:
       summary: Consultar precios
       description: Permite consultar el precio de un producto para una cadena en una fecha específica.
       parameters:
