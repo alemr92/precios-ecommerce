@@ -22,6 +22,12 @@ public class MotherPrice {
         return calendar.getTime();
     }
 
+    public static Date returnsADateByDays(int days){
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, days);
+        return calendar.getTime();
+    }
+
     public static Price mapToPrice(PriceEntity priceEntity) {
         Price price = new Price();
         price.setBrandId(priceEntity.getBrandId());
@@ -33,11 +39,5 @@ public class MotherPrice {
         price.setPrice(priceEntity.getPrice());
         price.setCurrency(priceEntity.getCurrency());
         return price;
-    }
-
-    public static Date returnsADateByDays(int days){
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, days);
-        return calendar.getTime();
     }
 }

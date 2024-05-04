@@ -34,7 +34,7 @@ public class PriceEntity {
 
     private Double price;
 
-    @Column(name = "CURR") // Especifica el nombre de la columna en la tabla
+    @Column(name = "CURR")
     private String currency;
 
 }
