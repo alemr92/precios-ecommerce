@@ -15,7 +15,7 @@ import java.util.Date;
  * The type Price controller.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/prices")
 public class PriceController {
 
     private final PriceServiceImpl priceServiceImpl;
@@ -37,7 +37,7 @@ public class PriceController {
      * @param brandId   the brand id
      * @return the price
      */
-    @GetMapping("/getPrice")
+    @GetMapping()
     public ResponseEntity<Price> getPrice(
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date date,
             @RequestParam Long productId,

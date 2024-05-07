@@ -10,9 +10,8 @@ Desarrollada en Java con Spring Boot.
 
 ## Requisitos
 ```bash
-Java 17
 Maven
-Docker (para la construcción y ejecución del contenedor Docker)
+Docker
 ```
 ## Instalación y Ejecución
 ```bash
@@ -36,12 +35,12 @@ Ejecuta la imagen Docker:
 ```bash
 docker run -p 8081:8080 precios-ecommerce
 ```
-La aplicación estará disponible en http://localhost:8080/api.
+La aplicación estará disponible en http://localhost:8081/prices.
 
 ## Uso
 Puedes realizar consultas de precios utilizando el endpoint REST proporcionado por la aplicación. Aquí tienes un ejemplo de cómo hacer una consulta utilizando cURL:
 ```bash
-curl -X GET 'http://localhost:8080/api/getPrice?date=2020-06-15 10:00&productId=35455&brandId=1'
+curl -X GET 'http://localhost:8081/prices?date=2020-06-15 10:00&productId=35455&brandId=1'
 ```
 Reemplaza la fecha, el identificador del producto y el identificador de la cadena según sea necesario.
 
@@ -64,7 +63,7 @@ servers:
     description: Servidor local
 
 paths:
-  /api/getPrice:
+  /prices:
     get:
       summary: Consultar precios
       description: Permite consultar el precio de un producto para una cadena en una fecha específica.

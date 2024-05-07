@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class PriceControllerIntegrationTest {
 
-    private static final String BASE_URL = "http://localhost:8080/api";
+    private static final String BASE_URL = "http://localhost:8080/prices";
 
     @BeforeEach
     public void setUp() {
@@ -52,7 +52,7 @@ class PriceControllerIntegrationTest {
                 .param("productId", 35455)
                 .param("brandId", 1)
                 .when()
-                .get("/getPrice");
+                .get();
 
         response.then().statusCode(200);
         response.then().contentType(ContentType.JSON);
