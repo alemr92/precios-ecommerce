@@ -1,6 +1,7 @@
 package com.indra.preciosecommerce.application.services;
 
 import com.indra.preciosecommerce.domain.models.Price;
+import com.indra.preciosecommerce.domain.models.exceptions.ProductNotFoundException;
 import com.indra.preciosecommerce.domain.ports.PriceServicePort;
 import com.indra.preciosecommerce.infraestructura.adapters.PriceRepositoryImpl;
 import com.indra.preciosecommerce.infraestructura.entities.PriceEntity;
@@ -37,7 +38,8 @@ public class PriceServiceImpl implements PriceServicePort {
         List<PriceEntity> prices = priceRepositoryImpl.findPriceByStartDateLessThanEqualAndEndDateGreaterThanEqualAndProductIdAndBrandId(date, date, productId, brandId);
         Optional<PriceEntity> maxPriorityPrice = prices.stream()
                 .max(Comparator.comparingLong(PriceEntity::getPriority));
-        return maxPriorityPrice.map(this::convertToPriceModel).orElse(null);
+        return maxPriorityPrice.map(this::convertToPriceModel)
+                .orElseThrow(() -> new ProductNotFoundException("Producto no encontrado"));
     }
 
     private Price convertToPriceModel(PriceEntity priceEntity) {
