@@ -5,6 +5,6 @@ import com.indra.preciosecommerce.domain.models.Price;
 
 import java.util.Date;
 
-public interface PriceServicePort {
+public interface PriceService {
     Price getPrice(Date date, Long productId, Long brandId);
 }

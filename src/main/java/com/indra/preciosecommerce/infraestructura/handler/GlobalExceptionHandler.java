@@ -1,5 +1,6 @@
-package com.indra.preciosecommerce.domain.models.exceptions;
+package com.indra.preciosecommerce.infraestructura.handler;
 
+import com.indra.preciosecommerce.domain.models.exceptions.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -2,7 +2,7 @@ package com.indra.preciosecommerce.application.services;
 
 import com.indra.preciosecommerce.domain.models.Price;
 import com.indra.preciosecommerce.domain.models.exceptions.ProductNotFoundException;
-import com.indra.preciosecommerce.domain.ports.PriceServicePort;
+import com.indra.preciosecommerce.domain.ports.PriceService;
 import com.indra.preciosecommerce.infraestructura.adapters.PriceRepositoryImpl;
 import com.indra.preciosecommerce.infraestructura.entities.PriceEntity;
 import org.modelmapper.ModelMapper;
@@ -17,7 +17,7 @@ import java.util.Optional;
  * The type Price service.
  */
 @Service
-public class PriceServiceImpl implements PriceServicePort {
+public class PriceServiceImpl implements PriceService {
 
     private final PriceRepositoryImpl priceRepositoryImpl;
     private final ModelMapper modelMapper;
