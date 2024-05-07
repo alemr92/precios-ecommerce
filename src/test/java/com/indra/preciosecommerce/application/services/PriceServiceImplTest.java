@@ -34,7 +34,7 @@ class PriceServiceImplTest {
     private PriceServiceImpl priceServiceImpl;
 
     @Test
-    void getsPrice() {
+    void getsAPrice() {
         Date date = new Date();
         Long productId = 35455L;
         Long brandId = 1L;

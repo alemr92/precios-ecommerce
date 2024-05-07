@@ -38,7 +38,7 @@ class PriceServiceImplIntegrationTest {
     }
 
     @Test
-    void testGetPrice() {
+    void getsAPrice() {
         Date date = new Date();
         Long productId = 35455L;
         Long brandId = 1L;

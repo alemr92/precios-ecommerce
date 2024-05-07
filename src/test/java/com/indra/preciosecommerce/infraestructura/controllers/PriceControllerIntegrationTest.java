@@ -22,31 +22,28 @@ class PriceControllerIntegrationTest {
     }
 
     @Test
-    void getsPriceAt10AMOnDay14() {
-        getsPrice("2020-06-14 10:00", "35.5");
+    void getsAPriceAt10AMOnDay14() {
+        getsAPrice("2020-06-14 10:00", "35.5");
     }
 
     @Test
-    void getsPriceAt16PMOnDay14() {
-        getsPrice("2020-06-14 16:00", "25.45");
+    void getsAPriceAt16PMOnDay14() {
+        getsAPrice("2020-06-14 16:00", "25.45");
     }
 
     @Test
-    void getsPriceAt21PMOnDay14() {
-        getsPrice("2020-06-14 21:00", "35.5");
+    void getsAPriceAt21PMOnDay14() { getsAPrice("2020-06-14 21:00", "35.5"); }
+    @Test
+    void getsAPriceAt10AMOnDay15() {
+        getsAPrice("2020-06-15 10:00", "30.5");
     }
 
     @Test
-    void getsPriceAt10AMOnDay15() {
-        getsPrice("2020-06-15 10:00", "30.5");
+    void getsAPriceAt21PMOnDay16() {
+        getsAPrice("2020-06-16 21:00", "38.95");
     }
 
-    @Test
-    void getsPriceAt21PMOnDay16() {
-        getsPrice("2020-06-16 21:00", "38.95");
-    }
-
-    private void getsPrice(String date, String expectedPrice) {
+    private void getsAPrice(String date, String expectedPrice) {
         Response response = RestAssured.given()
                 .param("date", date)
                 .param("productId", 35455)
